@@ -1,5 +1,48 @@
 var should = require('chai').should();
 // var assert = require('assert')
+var Animal = require(process.cwd() + '/lib/Animal.js');
+
+
+describe('Animal', function () {
+  describe('constructor', function () {
+    it('should return an animal object', function () {
+      var animal = new Animal();
+
+      animal.should.be.an('object');
+      animal.should.be.an.instanceOf(Animal)
+    })
+
+    it('should be alive', function () {
+      var animal = new Animal();
+      animal.alive.should.be.true;
+    })
+    it('should accept a type', function () {
+      var cat = new Animal('cat');
+      var dog = new Animal('dog');
+
+      cat.species.should.equal('cat');
+      dog.species.should.equal('dog');
+    });
+    describe('#beCute()', function () {
+      it('should be a prototype method', function () {
+        var animal = new Animal();
+        animal.should.respondTo('beCute');
+        animal.should.not.have.ownProperty('beCute');
+      })
+      it('should make the animal cute', function () {
+        var animal = new Animal();
+        animal.isCute.should.not.be.true;
+        animal.beCute();
+        animal.isCute.should.be.true;
+      })
+    })
+
+  });
+
+
+
+
+});
 
 describe('Tests', function() {
   it('truthyness', function () {
